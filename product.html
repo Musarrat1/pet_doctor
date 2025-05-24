@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details | Pet Paradise</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow-lg">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Pet House</h1>
+      <nav class="hidden md:flex gap-6">
+        <a href="index.html" class="hover:text-purple-500">Home</a>
+        <a href="store.html" class="hover:text-purple-500">Shop</a>
+        <a href="#" class="hover:text-purple-500">About</a>
+        <a href="#" class="hover:text-purple-500">Contact</a>
+      </nav>
+      <div class="space-x-4">
+        <i class="fas fa-user"></i>
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Details Section -->
+  <main class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+    
+    <!-- Product Image -->
+  <!-- Product Image -->
+<img id="product-image" src="" alt="Product Image" class="rounded-xl shadow-md w-full">
+
+<!-- Product Info -->
+<h2 id="product-name" class="text-3xl font-semibold mb-2"></h2>
+
+<div id="product-rating" class="flex items-center text-yellow-400 mb-4"></div>
+
+<p id="product-price" class="text-xl font-bold text-purple-600 mb-4"></p>
+<p id="product-description" class="mb-6 text-gray-600"></p>
+
+<!-- Product Details -->
+<ul id="product-details-list" class="list-disc pl-5 text-gray-700 space-y-1"></ul>
+
+
+    <!-- Product Info -->
+    <div>
+      <h2 class="text-3xl font-semibold mb-2">Cat Bowl</h2>
+      <div class="flex items-center text-yellow-400 mb-4">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+        <span class="ml-2 text-sm text-gray-600">(42 reviews)</span>
+      </div>
+
+      <p class="text-xl font-bold text-purple-600 mb-4">$20.99</p>
+      <p class="mb-6 text-gray-600">This stylish ceramic cat bowl features a cute paw print design and is perfect for food or water. Microwave and dishwasher safe.</p>
+
+      <button class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg text-lg transition shadow-lg">
+        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+      </button>
+
+      <!-- Product Details -->
+      <div class="mt-8">
+        <h3 class="text-lg font-semibold mb-2">Product Details</h3>
+        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+          <li>Material: Ceramic</li>
+          <li>Capacity: 400ml</li>
+          <li>Dishwasher safe</li>
+          <li>Non-slip base</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white text-center py-6 mt-10 shadow-inner">
+    <p class="text-sm text-gray-500">&copy; 2025 Pet Paradise. All rights reserved.</p>
+  </footer>
+  <script>
+  const products = {
+    catbowl: {
+      name: "Cat Bowl",
+      price: 20.99,
+      rating: 4.5,
+      reviews: 42,
+      description: "This stylish ceramic cat bowl features a cute paw print design and is perfect for food or water. Microwave and dishwasher safe.",
+      image: "https://images.unsplash.com/photo-1591871937573-74dbba515c4c?auto=format&fit=crop&w=600&q=80",
+      details: [
+        "Material: Ceramic",
+        "Capacity: 400ml",
+        "Dishwasher safe",
+        "Non-slip base"
+      ]
+    },
+    dogcollar: {
+      name: "Dog Collar",
+      price: 15.99,
+      rating: 4.7,
+      reviews: 58,
+      description: "Durable and adjustable dog collar made from high-quality nylon.",
+      image: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=600&q=80",
+      details: [
+        "Material: Nylon",
+        "Adjustable size",
+        "Quick release buckle",
+        "Reflective strips"
+      ]
+    }
+  };
+
+  // Function to get URL parameter
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  function loadProduct() {
+    const productId = getQueryParam("id");
+    if (!productId || !products[productId]) {
+      document.body.innerHTML = "<p class='text-center mt-20 text-red-600'>Product not found.</p>";
+      return;
+    }
+
+    const product = products[productId];
+
+    // Update page content dynamically
+    document.getElementById("product-name").textContent = product.name;
+    document.getElementById("product-price").textContent = `$${product.price.toFixed(2)}`;
+    document.getElementById("product-description").textContent = product.description;
+    document.getElementById("product-image").src = product.image;
+    document.getElementById("product-image").alt = product.name;
+
+    // Update rating stars
+    const ratingContainer = document.getElementById("product-rating");
+    ratingContainer.innerHTML = "";
+    const fullStars = Math.floor(product.rating);
+    const halfStar = product.rating % 1 >= 0.5;
+    for (let i = 0; i < fullStars; i++) {
+      ratingContainer.innerHTML += '<i class="fas fa-star text-yellow-400"></i>';
+    }
+    if (halfStar) {
+      ratingContainer.innerHTML += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+    }
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+    for (let i = 0; i < emptyStars; i++) {
+      ratingContainer.innerHTML += '<i class="far fa-star text-yellow-400"></i>';
+    }
+    ratingContainer.innerHTML += ` <span class="ml-2 text-sm text-gray-600">(${product.reviews} reviews)</span>`;
+
+    // Update product details list
+    const detailsList = document.getElementById("product-details-list");
+    detailsList.innerHTML = "";
+    product.details.forEach(detail => {
+      const li = document.createElement("li");
+      li.textContent = detail;
+      detailsList.appendChild(li);
+    });
+  }
+
+  window.onload = loadProduct;
+</script>
+
+</body>
+</html>
