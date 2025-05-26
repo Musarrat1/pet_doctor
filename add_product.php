@@ -25,11 +25,35 @@ $result = $conn->query("SELECT * FROM products");
 <head>
   <title>Add Product</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
 </head>
+<style>
+     .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 1rem;
+      color: #FA812F;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .back-arrow:hover {
+      color: #FFDC26;
+      transform: translateX(-3px);
+    }
+</style>
 <body class="bg-gray-50 p-6">
 
   <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold mb-4">Add New Product</h2>
+       <a href="index.html" class="back-arrow bg-white px-4 py-3 rounded-full shadow-lg "><i class="ri-arrow-left-line"></i></a>
+    <h2 class="text-2xl font-bold mb-4">
+      Add New Product</h2>
 
     <?php if (!empty($error_message)): ?>
       <div class="mb-4 text-red-600 font-semibold"><?= $error_message ?></div>
@@ -46,7 +70,7 @@ $result = $conn->query("SELECT * FROM products");
       <input type="number" step="0.01" name="price" required class="w-full mb-4 border p-2 rounded" />
 
       <label class="block mb-2">Image URL:</label>
-      <input type="text" name="image" required class="w-full mb-4 border p-2 rounded" />
+      <input type="file" name="image" required class="w-full mb-4 border p-2 rounded" />
 
       <label class="inline-flex items-center mb-4">
         <input type="checkbox" name="is_new" class="mr-2" /> Is New Product?

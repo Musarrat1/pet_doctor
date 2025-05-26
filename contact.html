@@ -5,30 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact Us - Pet Doctor</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+         .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 1rem;
+      color: #FA812F;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .back-arrow:hover {
+      color: #FFDC26;
+      transform: translateX(-3px);
+    }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <section class="py-16 px-4 max-w-7xl mx-auto">
     <div class="text-center mb-12">
+         <a href="index.html" class="back-arrow bg-white px-4 py-3 rounded-full shadow-lg "><i class="ri-arrow-left-line"></i></a>
       <h2 class="text-4xl font-bold text-yellow-600">Contact Us</h2>
       <p class="mt-4 text-gray-600">We’d love to hear from you! Whether you have a question about appointments, services, or anything else, our team is ready to help.</p>
     </div>
 
     <div class="grid md:grid-cols-2 gap-10">
-      <!-- Contact Info -->
+ 
       <div class="bg-white p-8 rounded-2xl shadow-md">
         <h3 class="text-2xl font-semibold mb-4">Get in Touch</h3>
         <p class="mb-4 text-gray-600">Feel free to reach out to us using the information below.</p>
 
         <ul class="space-y-4">
-          <li><strong>📍 Address:</strong> 123 Pet Street, Vet City, VC 45678</li>
-          <li><strong>📞 Phone:</strong> (123) 456-7890</li>
-          <li><strong>📧 Email:</strong> contact@petdoctor.com</li>
-          <li><strong>⏰ Hours:</strong> Mon–Fri, 9am–6pm</li>
+          <li><strong> Address:</strong> 123 Pet Street, Gulshan, Dhaka 45678</li>
+          <li><strong> Phone:</strong>+8801712778321</li>
+          <li><strong> Email:</strong> contact@petdoctor.com</li>
+          <li><strong> Hours:</strong> Mon–Fri, 9am–6pm</li>
         </ul>
       </div>
 
-      <!-- Contact Form -->
+    
       <form class="bg-white p-8 rounded-2xl shadow-md space-y-6">
         <div>
           <label class="block font-semibold mb-1" for="name">Full Name</label>

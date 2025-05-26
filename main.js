@@ -9,7 +9,7 @@ menuBtn.addEventListener("click", () => {
   menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
 });
 
-// Close menu when any nav link is clicked
+
 navLinks.addEventListener("click", () => {
   navLinks.classList.remove("open");
   menuBtnIcon.setAttribute("class", "ri-menu-line");
@@ -21,38 +21,37 @@ const scrollRevealOption = {
   duration: 1000,
 };
 
-// ScrollReveal animations for header content
+
 ScrollReveal().reveal(".header__content h4", { ...scrollRevealOption });
 ScrollReveal().reveal(".header__content h1", { ...scrollRevealOption, delay: 500 });
 ScrollReveal().reveal(".header__content h2", { ...scrollRevealOption, delay: 1000 });
 ScrollReveal().reveal(".header__content p", { ...scrollRevealOption, delay: 1500 });
 ScrollReveal().reveal(".header__btn", { ...scrollRevealOption, delay: 2000 });
 
-// Intro cards
+
 ScrollReveal().reveal(".intro__card", { ...scrollRevealOption, interval: 500 });
 
-// About images with different origins
 ScrollReveal().reveal(
   ".about__row:nth-child(3) .about__image img, .about__row:nth-child(5) .about__image img",
   { ...scrollRevealOption, origin: "left" }
 );
 ScrollReveal().reveal(".about__row:nth-child(4) .about__image img", { ...scrollRevealOption, origin: "right" });
 
-// About content text
+
 ScrollReveal().reveal(".about__content span", { ...scrollRevealOption, delay: 500 });
 ScrollReveal().reveal(".about__content h4", { ...scrollRevealOption, delay: 1000 });
 ScrollReveal().reveal(".about__content p", { ...scrollRevealOption, delay: 1500 });
 
-// Product and service cards
+
 ScrollReveal().reveal(".product__card", { ...scrollRevealOption, interval: 500 });
 ScrollReveal().reveal(".service__card", { duration: 1000, interval: 500 });
 
-// Initialize Swiper slider
+
 const swiper = new Swiper(".swiper", {
   slidesPerView: 3,
   spaceBetween: 20,
   loop: true,
 });
 
-// Instagram images reveal
+
 ScrollReveal().reveal(".instagram__grid img", { duration: 1000, interval: 500 });

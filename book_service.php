@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Invalid email format.");
     }
 
-    // Database connection (update with your credentials)
+   
     $host = 'localhost';
     $db = 'petplace';
     $user = 'root';
@@ -37,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
 
     } catch (PDOException $e) {
-        // Log error in real app instead of die
+     
         die("Database error: " . $e->getMessage());
     }
 
 } else {
-    // Redirect if accessed directly
+ 
     header('Location: services.php');
     exit;
 }

@@ -1,7 +1,13 @@
 <?php
-// No PHP logic here for now, just static page.
-// You can enhance this by fetching services from DB if you want dynamic.
+// services.php
+$conn = new mysqli("localhost", "root", "", "petplace");
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
 
+
+$result = $conn->query("SELECT * FROM services");
+$services = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,39 +41,13 @@
 <section class="py-16">
   <div class="container mx-auto px-6">
     <div id="serviceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Visible services -->
-      <div class="service-card bg-white p-6 rounded-2xl shadow">
-        <h3 class="text-xl font-semibold text-black-700 mb-2">Home Sitting</h3>
-        <p class="text-gray-600 mb-4">Your pet stays comfortable in their own home with daily sitter visits.</p>
-        <button data-service="Home Sitting" class="book-btn bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Book Now</button>
-      </div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow">
-        <h3 class="text-xl font-semibold text-black-700 mb-2"> Overnight Boarding</h3>
-        <p class="text-gray-600 mb-4">Safe, cozy environment for overnight stays with constant care.</p>
-        <button data-service="Overnight Boarding" class="book-btn bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Book Now</button>
-      </div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow">
-        <h3 class="text-xl font-semibold text-black-700 mb-2">Dog Walking</h3>
-        <p class="text-gray-600 mb-4">Personalized walks for all sizes and breeds, rain or shine!</p>
-        <button data-service="Dog Walking" class="book-btn bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Book Now</button>
-      </div>
-
-      <!-- Hidden services -->
-      <div class="service-card bg-white p-6 rounded-2xl shadow hidden">
-        <h3 class="text-xl font-semibold text-black-700 mb-2">Grooming</h3>
-        <p class="text-gray-600 mb-4">Bathing, brushing, nail trimming, and more with premium products.</p>
-        <button data-service="Grooming" class="book-btn bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Book Now</button>
-      </div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow hidden">
-        <h3 class="text-xl font-semibold text-black-700 mb-2"> Medication Support</h3>
-        <p class="text-gray-600 mb-4">Skilled staff helps administer medicine and post-surgery care.</p>
-        <button data-service="Medication Support" class="book-btn bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Book Now</button>
-      </div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow hidden">
-        <h3 class="text-xl font-semibold text-black-700 mb-2">Pet Nanny</h3>
-        <p class="text-gray-600 mb-4">Full-day companionship with fun activities and watchful eyes.</p>
-        <button data-service="Pet Nanny" class="book-btn bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Book Now</button>
-      </div>
+      <?php foreach ($services as $service): ?>
+        <div class="service-card bg-white p-6 rounded-2xl shadow <?php echo $service['is_hidden'] ? 'hidden' : ''; ?>">
+          <h3 class="text-xl font-semibold text-black-700 mb-2"><?= htmlspecialchars($service['name']) ?></h3>
+          <p class="text-gray-600 mb-4"><?= htmlspecialchars($service['description']) ?></p>
+          <button data-service="<?= htmlspecialchars($service['name']) ?>" class="book-btn bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Book Now</button>
+        </div>
+      <?php endforeach; ?>
     </div>
 
     <div class="text-center mt-10">
@@ -76,11 +56,10 @@
   </div>
 </section>
 
-<!-- Booking Modal -->
 <div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
   <div class="bg-white rounded-lg max-w-md w-full p-6 relative">
     <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
-    <h3 class="text-xl font-bold mb-4 text-purple-700">Book Service</h3>
+    <h3 class="text-xl font-bold mb-4 text-yellow-600">Book Service</h3>
     <form id="bookingForm" method="POST" action="book_service.php" class="space-y-4">
       <input type="hidden" name="service_name" id="service_name" />
       <div>
@@ -111,7 +90,6 @@
 </footer>
 
 <script>
-  // Toggle hidden services
   const toggleBtn = document.getElementById('toggleBtn');
   const hiddenCards = document.querySelectorAll('.service-card.hidden');
   let expanded = false;
@@ -121,13 +99,11 @@
     toggleBtn.textContent = expanded ? 'Show Less' : 'Show More';
   });
 
-  // Modal elements
   const bookingModal = document.getElementById('bookingModal');
   const closeModalBtn = document.getElementById('closeModal');
   const bookingForm = document.getElementById('bookingForm');
   const serviceNameInput = document.getElementById('service_name');
 
-  // Show modal when Book Now clicked
   document.querySelectorAll('.book-btn').forEach(button => {
     button.addEventListener('click', () => {
       const service = button.getAttribute('data-service');
@@ -136,22 +112,17 @@
     });
   });
 
-  // Close modal handler
   closeModalBtn.addEventListener('click', () => {
     bookingModal.classList.add('hidden');
     bookingForm.reset();
   });
 
-  // Close modal when clicking outside the modal content
   bookingModal.addEventListener('click', e => {
     if (e.target === bookingModal) {
       bookingModal.classList.add('hidden');
       bookingForm.reset();
     }
   });
-
-  // Optionally add client-side validation here
-
 </script>
 
 </body>

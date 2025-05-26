@@ -1,6 +1,6 @@
 
 <?php
-// Database connection
+
 $conn = new mysqli("localhost", "root", "", "petplace");
 
 // Check connection
@@ -30,7 +30,7 @@ $result = $conn->query($sql);
 </style>
 <body class="bg-gray-50">
 
-<!-- Your header + hero sections here -->
+
  <header class="text-black bg-white shadow-lg">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-2">
@@ -40,9 +40,9 @@ $result = $conn->query($sql);
         <ul class="flex space-x-8">
           <li><a href="index.html" class="hover:text-yellow-400 transition">Home</a></li>
           <li><a href="store.php" class="hover:text-yellow-400 transition">Shop</a></li>
-          <li><a href="index.html" class="hover:text-yellow-400 transition">Services</a></li>
+          <li><a href="services.php" class="hover:text-yellow-400 transition">Services</a></li>
           <li><a href="index.html" class="hover:text-yellow-400 transition">About</a></li>
-          <li><a href="index.html" class="hover:text-yellow-400 transition">Contact</a></li>
+          <li><a href="contact.html" class="hover:text-yellow-400 transition">Contact</a></li>
         </ul>
       </nav>
       <div class="flex items-center space-x-4 relative">
@@ -71,7 +71,7 @@ $result = $conn->query($sql);
         </p>
      <a
   href="#products"
-  class="inline-flex items-center border border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-700 transition"
+  class="inline-flex items-center border border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-yellow-500 transition"
 >
   Shop Now <i class="fas fa-arrow-right ml-2"></i>
 </a>
@@ -81,7 +81,7 @@ $result = $conn->query($sql);
   </section>
 
 <main id="products" class="container mx-auto px-4 py-8">
-  <!-- Product Grid -->
+
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     <?php while($row = $result->fetch_assoc()): ?>
       <a href="add_to_cart.php?id=<?= $row['id'] ?>" class="block group">

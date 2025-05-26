@@ -23,7 +23,7 @@ foreach ($cart as $product_id => $quantity) {
     $stmt->execute();
 }
 
-unset($_SESSION['cart']); // clear cart after successful payment
+unset($_SESSION['cart']); 
 ?>
 
 <!DOCTYPE html>

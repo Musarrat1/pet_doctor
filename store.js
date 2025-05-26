@@ -19,7 +19,7 @@ shopNowButtons.forEach(button => {
   });
 });
 
-  // Add to cart functionality
+
  const addToCartButtons = document.querySelectorAll('.product-card button.add-to-cart');
   
   addToCartButtons.forEach(button => {
@@ -27,17 +27,16 @@ shopNowButtons.forEach(button => {
       e.preventDefault();
       e.stopPropagation();
       
-      // Get product info
+  
       const productCard = this.closest('.product-card');
       const productName = productCard.querySelector('h3').textContent;
       const productPrice = productCard.querySelector('.text-petgreen-600').textContent;
       
-      // Update cart count
+
       const cartCount = document.querySelector('.fa-shopping-cart + span');
       let currentCount = parseInt(cartCount.textContent);
       cartCount.textContent = currentCount + 1;
       
-      // Show added notification
       showNotification(`${productName} added to cart!`);
     });
   });
